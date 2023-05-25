@@ -6,6 +6,6 @@
 
 <h5> Uses <h5>
 <ul>
-  <li> Twilio API to connect to whatsapp <li>
-  <li> ChatGPT API for text completion <li>
+  <li> Twilio API to connect to whatsapp </li>
+  <li> ChatGPT API for text completion </li>
 <ul>
