@@ -6,21 +6,36 @@ from dotenv import load_dotenv
 load_dotenv() # Load environment variables from a ".env" file, if present
 CHAT_HISTORY_FILE = "chat_history.json"
 openai.api_key = os.getenv("OPENAI_API_KEY")
+ADMIN_PHONE_NUMBER = os.getenv('ADMIN_PHONE_NUMBER')
 
 
 def chat(msg:str) -> dict:
         try:
-            mark = "wGpt By *Vitope Achumi*.\n\n*What's new?*\nIt now _*remember's*_ your chat history.\n\nReply with _*'rm --json'*_  to delete your history.'"
+            mark = "wGpt By *Vitope Achumi*.\n\n*What's new?*\nIt now _*remember's*_ your chat history.\n\nReply with _*'rm --json'*_  to delete your history.\n\n\n*Only for admin*:\n\nTo view chat history(all users) use\n(password) --dump-history'"
             chat_history = load_chat_history()
             user_input = msg  # Get user input
-            print(user_input)
+            if os.getenv('PASSWORD') == user_input:
+                history:str = '*Chat history:*\n\n'
+                for entry in chat_history:
+                    if entry['role'] == 'user':
+                        history += entry['content'] + '\n'
+                return {
+                    'status':1,
+                    'response':history
+                    }
+
+            if '--dump history' in user_input:
+                return {
+                    "status": 1,
+                    "response":"*Error*\n\n *--dump history* without password!\n\n"
+                    }
             if "rm --json" in user_input:
                 os.remove("chat_history.json")
                 return{
                     "status": 1,
                     "response":"History deleted.\nI can no longer access our past conversations!"
                 }
-            elif "--info" in user_input:
+            if "--info" in user_input:
                 return{
                     "status": 1,
                     "response":mark
@@ -42,6 +57,7 @@ def chat(msg:str) -> dict:
                 'status': 0,
                 'response': 'Server is down.'
             }
+
 
 
 def prompt(chat_history, user_input):
