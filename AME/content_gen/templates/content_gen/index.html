@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>Easy</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link rel='stylesheet' href='{% static 'content/style/styles.css' %}'>
+        <link rel='stylesheet' href='{% static 'content/style/superbuild.css'%}'>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/super-build/ckeditor.js"></script>
+        <script src='{% static 'content/script/index.js' %}'></script>
+        {% comment %} Superbuild {% endcomment %}
+    </head>
+    <body>
+        <div class='container-fluid header-div position-sticky sticky-top'>
+            <a href='{% url 'index'%}' class='rm-deco'><h1 class='header-class'>AME</h1></a>
+        </div>
+        {% comment %} This portion handles the input field for prompt and filters {% endcomment %}
+        <div class='main-container container-fluid mt-4 d-flex'>
+            <div class='container'>
+                <form method='POST' class="form-floating">
+                    {% csrf_token %}
+                    <input type="text" class="form-control is-invalid" id="floatingInputInvalid" value='{{question}}' name='input'>
+                    <label for="floatingInputInvalid">Ask away:</label>
+                    <div class='container-fluid d-flex justify-content-evenly mt-3 mb-3'>
+                        <div class='container-fluid dropdown'>
+                            <button class="btn btn-primary dropdown-toggle pl-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
+                                Filter
+                            </button>
+                            <!-- Dropdown menu content goes here -->
+                            <div class='main-filter-container container dropdown-menu' aria-labelledby="dropdownMenuButton">
+                                <div class='filter-container container-fluid d-flex col justify-content-evenly'>
+                                    <div class='filter-container-sec m-2 border-bottom'>
+                                        <h5 class='filter-header'>Proficiency</h5>
+                                        {% comment %} <input type='radio' name='proficiency' value='Professional'>
+                                        <label class='proficiency-label'>College</label><br>
+                                        <input type='radio' name='proficiency' value='Professional'>
+                                        <label class='proficiency-label'>Business</label><br>
+                                        <input type='radio' name='proficiency' value='Professional'>
+                                        <label class='proficiency-label'>Professional</label><br> {% endcomment %}
+                                        {% comment %} Python way {% endcomment %}
+                                        {% for labels in label %}
+                                            <input type='radio' name='proficiency' value='Professional'>
+                                            <label class='proficiency-label'>{{labels}}</label><br>
+                                        {% endfor %}
+                                    </div>
+                                    <div class='filter-container-sec m-2 border-bottom'>
+                                        <h5 class='filter-header'>Word Limit</h5>
+                                        <input class='filter-wLimit' type='text' name='wordLimit' placeholder='Max: 900 (default 300)'>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type='submit' class='btn btn-primary text-center rounded' value='Generate'>
+                    </div>
+                </form>
+
+                {% comment %} This part handles generated text {% endcomment %}
+                {% comment %} <div class="input-group-text d-flex align-items-center mb-1">
+                    <button name='undo' onclick='undo()' class='material-symbols-outlined icon-button' data-toggle="tooltip" data-placement="top" title="Undo">undo</button>
+                    <button name='redo' onclick='redo()' class='material-symbols-outlined icon-button' data-toggle="tooltip" data-placement="top" title="Redo">redo</button>
+                    <button onclick='text_delete()' class='material-symbols-outlined icon-button' data-toggle="tooltip" data-placement="top" title="Delete all">delete</button>
+                    <button onclick='upper()' class='material-symbols-outlined icon-button' data-toggle="tooltip" data-placement="top" title="Uppercase">expand_less</button>
+                    <button onclick='lower()' class='material-symbols-outlined icon-button' data-toggle="tooltip" data-placement="top" title="Lowercase">expand_more</button>
+                </div> {% endcomment %}
+                {% comment %} <div class="input-group d-flex rounded">
+                    <textarea contenteditable='true' rows='25' name='generated' class="form-control" placeholder='Your generated content' aria-label="Text generation">{{value}}</textarea>
+                </div>
+                <div class='container'>
+                    <input type='button' id='copyButton' onclick="copy()" class='btn btn-success mt-3' value='Copy'>
+                </div> {% endcomment %}   
+                <div id="container">
+                    <div id="editor" name='generatedContent'>
+                        {{value}}
+                    </div>
+                </div> 
+                    {% comment %}  {% endcomment %}
+            </div>
+        </div>    
+        <script src='{% static 'content/script/app.js'%}'></script>
+    </body>
+</html>

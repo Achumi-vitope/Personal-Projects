@@ -1,0 +1,20 @@
+#container {
+    width:100%;
+    margin: 20px auto;
+}
+.ck-editor__editable[role="textbox"] {
+    /* editing area */
+    min-height: 80vh;
+}
+.ck-content .image {
+    /* block images */
+    max-width: 80%;
+    margin: 20px auto;
+}
+
+/* Hide the CKEditor toolbar by default */
+#editor .ck-toolbar {
+    display: none;
+}
+
+/* Style the "hamburger" menu button */

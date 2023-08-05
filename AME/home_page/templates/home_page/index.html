@@ -1,0 +1,70 @@
+{% extends 'home_page/layout.html'%}
+{% load static %}
+{% block title %}
+    Home
+{% endblock %}
+{% block body %}
+{% comment %} The first page you'll see {% endcomment %}
+    <div class='cover-container container-fluid d-flex align-items-center justify-content-center row bg-black'>
+        <div class='conatiner cover-header d-flex flex-column align-items-center justify-content-center'>
+            <p class='text-muted verse'>Artifical Inetlligence 7:7 </p>
+            <h1 class='chonburi-font mb-3' style='font-size: 4em;'>Ask and it shall be <u>written</u> for you</h1>
+        </div>
+    </div>  
+    <div class="content">
+        <div class="container">
+          <h2 id='feature' class="my-5 text-center poppins-font text-uppercase" style='color:white; font-size:3em; font-weight:600'>Features</h2>
+          <div class="d-flex carousel-nav">
+            <a href="#" class="raleway-font col active">A.I</a>
+            <a href="#" class="raleway-font col">Editing</a>
+            <a href="#" class="raleway-font col">Export</a>
+          </div>
+          <div class="owl-carousel owl-1">
+    
+            <div class="media-29101 d-md-flex w-100">
+              <div class="img">
+                <img src="{% static 'home_page/images/AI.jpg' %}" alt="Image" class="img-fluid">
+              </div>
+              <div class="text">
+                <a class="category d-block mb-4" href="#">A.I &mdash; Contents</a>
+                <h2><a href="#">Making your assignments easier!</a></h2>
+                <p>Generate your assignment contents whith the power of Artifical Inetlligence.</p>
+              </div>
+            </div> <!-- .item -->
+    
+            <div class="media-29101 d-md-flex w-100">
+              <div class="img">
+                <img src="{% static 'home_page/images/text.svg.png' %}" alt="Image" class="img-fluid">
+              </div>
+              <div class="text">
+                <a class="category d-block mb-4" href="#">Editing &mdash;Word Processing</a>
+                <h2><a href="#">In-built rich text editing and more.</a></h2>
+                <p>Ditch Ms - Word</p>
+              </div>
+            </div> <!-- .item -->
+    
+            <div class="media-29101 d-md-flex w-100">
+              <div class="img">
+                <img src="{% static 'home_page/images/expost.jpg' %}" alt="Image" class="img-fluid">
+              </div>
+              <div class="text">
+                <a class="category d-block mb-4" href="#">Export &mdash;Docx and PDF</a>
+                <h2><a href="#">Export your contents with ease!</a></h2>
+                <p>Download your work in PDF or Docx format</p>
+              </div>
+            </div> <!-- .item -->
+          </div>
+        </div>
+      </div>
+    <div class='button-container container-fluid d-flex flex-column align-items-center text-center'>
+        <a class='rm-deco' href='{% url 'content-index'%}' target='blank_'><button class='content-btn btn btn-light mb-5 mb-md-0'>Start Writting</button></a>
+    <div>
+    <style>
+      @media (max-width:1400px) {
+        .verse{
+            width:100% !important;
+        }
+    }
+    </style>
+{% comment %} End {% endcomment %}
+{% endblock %}

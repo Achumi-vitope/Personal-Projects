@@ -1,0 +1,2 @@
+1. Content generation using OpenAI API
+2. PDF merge
